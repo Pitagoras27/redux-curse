@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import Axios from 'axios';
 
-import Users from '../rows';
-import './App.css';
+import Users from './rows';
+import './home.css';
 
-class App extends Component {
+class Home extends Component {
   // const [count, setCount] = useState(0);
   constructor(props) {
     super(props)
@@ -14,7 +13,8 @@ class App extends Component {
   }
 
   async componentDidMount() {
-    const { data } = await Axios.get('https://jsonplaceholder.typicode.com/users');
+    const fetchData = await fetch('https://jsonplaceholder.typicode.com/users');
+    const data = await fetchData.json();
     this.setState({
       users: data,
     })
@@ -22,6 +22,7 @@ class App extends Component {
   
   render() {
     const { users } = this.state; 
+    console.log(users, '<<')
     return (
       <div className='container'>
         <table>
@@ -40,4 +41,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Home;
