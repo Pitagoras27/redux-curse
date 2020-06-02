@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import * as getAll from '../../actions';
 import Users from './rows';
 import './home.css';
 
@@ -43,5 +44,4 @@ class Home extends Component {
 }
 
 const mapStateToProps = state => state.usariosReducer;
-
-export default connect(mapStateToProps, null)(Home);
+export default connect(mapStateToProps, getAll)(Home);
