@@ -22,7 +22,7 @@ class Home extends Component {
   
   render() {
     const { users } = this.state; 
-    console.log(users, '<<')
+    console.log(this.props)
     return (
       <div className='container'>
         <table>
