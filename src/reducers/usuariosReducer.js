@@ -1,5 +1,5 @@
 const INITIAL_STATE = {
-  usuario: []
+  usuario: [0,1,2,3]
 }
 
 const users = (state = INITIAL_STATE, action) => {

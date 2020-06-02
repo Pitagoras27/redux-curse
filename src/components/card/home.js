@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import Users from './rows';
 import './home.css';
@@ -22,7 +23,7 @@ class Home extends Component {
   
   render() {
     const { users } = this.state; 
-    console.log(this.props)
+    console.log(this.props, '<<<<<<<<<<<<')
     return (
       <div className='container'>
         <table>
@@ -41,4 +42,6 @@ class Home extends Component {
   }
 }
 
-export default Home;
+const mapStateToProps = state => state.usariosReducer;
+
+export default connect(mapStateToProps, null)(Home);
