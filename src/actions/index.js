@@ -8,7 +8,7 @@ export const getAll = () => async dispatch => {
     payload: true,
   })
   try {
-    const fetchData = await axios('https://jsonplaceholder.typicode.com/userss');
+    const fetchData = await axios('https://jsonplaceholder.typicode.com/users');
     dispatch({
       type: getUsers,
       payload: fetchData.data,

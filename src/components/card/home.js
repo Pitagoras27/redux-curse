@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 // import * as getAll from '../../actions';
 import { getAll } from '../../actions';
 import Users from './rows';
+import Spinner from '../spinner/spinner';
 import './home.css';
 
 class Home extends Component {
@@ -13,8 +14,7 @@ class Home extends Component {
   
   render() {
     const { usuarios, loading, errorMessage } = this.props;
-    console.log(errorMessage, loading)
-    return (
+    return ( <> { loading ? <Spinner /> : (
       <div className='container'>
         <table>
           <thead>
@@ -28,7 +28,7 @@ class Home extends Component {
           <tbody><Users list={usuarios} /></tbody>
         </table>
       </div>
-    )
+    )} </>)
   }
 }
 
