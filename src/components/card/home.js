@@ -12,8 +12,8 @@ class Home extends Component {
   }
   
   render() {
-    const { usuarios } = this.props;
-
+    const { usuarios, loading, errorMessage } = this.props;
+    console.log(errorMessage, loading)
     return (
       <div className='container'>
         <table>
