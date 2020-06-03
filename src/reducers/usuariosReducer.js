@@ -1,9 +1,9 @@
 const INITIAL_STATE = {
-  usuario: []
+  usuarios: []
 }
 
 const users = (state = INITIAL_STATE, action) => {
-  const { type, payload } = action; 
+  const { type, payload } = action;
   switch(type) {
     case 'GET_USERS':
       return{...state, usuarios: payload}

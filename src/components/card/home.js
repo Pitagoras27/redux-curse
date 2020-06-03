@@ -7,25 +7,13 @@ import Users from './rows';
 import './home.css';
 
 class Home extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      users: []
-    }
-  }
-
-  async componentDidMount() {
-    // const fetchData = await fetch('https://jsonplaceholder.typicode.com/users');
-    // const data = await fetchData.json();
-    // this.setState({
-    //   users: data,
-    // })
+  componentDidMount() {
     this.props.getAll()
   }
   
   render() {
-    const { users } = this.state; 
-    console.log(this.props, '<<<<<<<<<<<<')
+    const { usuarios } = this.props;
+
     return (
       <div className='container'>
         <table>
@@ -37,7 +25,7 @@ class Home extends Component {
               <td>website</td>
             </tr>
           </thead>
-          <tbody><Users list={users} /></tbody>
+          <tbody><Users list={usuarios} /></tbody>
         </table>
       </div>
     )
@@ -45,6 +33,7 @@ class Home extends Component {
 }
 
 const mapStateToProps = state => state.usariosReducer;
+
 const mapDispatchToProps = {
   getAll,
 }
