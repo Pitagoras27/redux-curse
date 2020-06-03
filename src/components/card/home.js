@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import { getAll } from '../../actions';
 import Users from './rows';
 import Spinner from '../spinner/spinner';
+import Error404 from '../404/error404';
+
 import './home.css';
 
 class Home extends Component {
@@ -12,9 +14,10 @@ class Home extends Component {
     this.props.getAll()
   }
   
-  render() {
-    const { usuarios, loading, errorMessage } = this.props;
-    return ( <> { loading ? <Spinner /> : (
+  getData = () => {
+    const { errorMessage, usuarios } = this.props;
+    if (errorMessage) return <Error404 />
+    return ( 
       <div className='container'>
         <table>
           <thead>
@@ -28,6 +31,12 @@ class Home extends Component {
           <tbody><Users list={usuarios} /></tbody>
         </table>
       </div>
+    )
+  }
+  render() {
+    const { loading } = this.props;
+    return ( <> { loading ? <Spinner /> : (
+      this.getData()
     )} </>)
   }
 }
