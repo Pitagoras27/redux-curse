@@ -17,7 +17,7 @@ class Home extends Component {
   render() {
     const { loading, usuarios, errorMessage } = this.props;
     return ( <> { loading ? <Spinner /> : (
-      <Table usuarios={usuarios}  />
+      <Table usuarios={usuarios} error={errorMessage} />
     )} </>)
   }
 }

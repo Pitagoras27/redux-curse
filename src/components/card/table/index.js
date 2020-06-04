@@ -10,7 +10,7 @@ const Table = ({usuarios, error}) => {
       <table>
         <thead>
           <tr>
-            <td>Id</td>
+            <td>Post</td>
             <td>User</td>
             <td>email</td>
             <td>website</td>
