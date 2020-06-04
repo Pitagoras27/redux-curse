@@ -2,33 +2,17 @@ import axios from 'axios';
 
 import { ACTIONS_NAMES } from '../constants';
 
-export const getAllPost = () => async dispatch => {
-  const { loading, getPosts, errorMessage } = ACTIONS_NAMES;
-  dispatch({
-    type: loading,
-    payload: true,
-  });
-  try {
-    const fetchData = await axios.get('https://jsonplaceholder.typicode.com/posts');
-    dispatch({
-      type: getPosts,
-      payload: fetchData.data,
-    });  
-  } catch (error) {
-    dispatch({
-      type: errorMessage,
-      payload: error.message,
-    });
-  }
-}
-
-export const getPostForUser = id => async dispatch => {
+export const getPostForUser = key => async (dispatch, getState) => {
   const { getPostForUser, errorMessage } = ACTIONS_NAMES;
+  const { posts } = getState().postsReducer;
+  const { usuarios } = getState().usariosReducer;
+  const userId = usuarios[key];
   try {
-    const { data } = await axios.get(`https://jsonplaceholder.typicode.com/posts?userId=${id}`)
+    const { data } = await axios.get(`https://jsonplaceholder.typicode.com/posts?userId=${userId['id']}`)
+    const accumPosts = [...posts, data];
     dispatch({
       type: getPostForUser,
-      payload: data,
+      payload: accumPosts,
     })
   } catch (error) {
     dispatch({

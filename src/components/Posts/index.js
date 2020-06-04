@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 
 import * as getAll from '../../actions';
-import { getAllPost } from '../../actions/getAllPosts';
 import { getPostForUser } from '../../actions/getAllPosts';
 
 class Post extends Component {
@@ -31,14 +30,13 @@ class Post extends Component {
   }
 }
 
-const mapStateToProps = ({usariosReducer, allPostsReducer}) => ({
+const mapStateToProps = ({usariosReducer, postsReducer}) => ({
   usariosReducer,
-  allPostsReducer,
+  postsReducer,
 });
 
 const mapDispathToProps = {
   ...getAll,
-  getAllPost,
   getPostForUser
 }
 
