@@ -100,7 +100,7 @@ body {
 .not-found .wave-message {
     position: absolute;
     bottom: 200px;
-    left: 50%;
+    left: 25%;
     padding-right: 50%;
     height: auto !important;
     color: #fff;
