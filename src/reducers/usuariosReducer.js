@@ -13,6 +13,7 @@ const users = (state = INITIAL_STATE, action) => {
         ...state,
         usuarios: payload,
         loading:false,
+        errorMessage: '',
       }
     case ACTIONS_NAMES.loading:
       return {...state, loading: true}

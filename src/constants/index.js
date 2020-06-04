@@ -3,4 +3,5 @@ export const ACTIONS_NAMES = {
   loading: 'LOADING',
   errorMessage: 'ERROR',
   getPosts: 'GET_POST',
+  getPostForUser: 'GET_POST_FOR_USER',
 }

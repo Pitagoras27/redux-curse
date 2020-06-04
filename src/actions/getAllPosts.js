@@ -21,3 +21,19 @@ export const getAllPost = () => async dispatch => {
     });
   }
 }
+
+export const getPostForUser = id => async dispatch => {
+  const { getPostForUser, errorMessage } = ACTIONS_NAMES;
+  try {
+    const { data } = await axios.get(`https://jsonplaceholder.typicode.com/posts?userId=${id}`)
+    dispatch({
+      type: getPostForUser,
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: errorMessage,
+      payload: error.message,
+    });
+  }
+}

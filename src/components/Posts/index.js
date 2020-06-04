@@ -2,15 +2,22 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 
 import * as getAll from '../../actions';
-import * as getAllPost from '../../actions/getAllPosts';
+import { getAllPost } from '../../actions/getAllPosts';
+import { getPostForUser } from '../../actions/getAllPosts';
 
 class Post extends Component {
   componentDidMount() {
-    const { usariosReducer, getAll, getAllPost } = this.props;
+    const {
+      match,
+      usariosReducer,
+      getAll,
+      getPostForUser,
+    } = this.props;
+
     if(!usariosReducer.usuarios.length) {
       getAll();
-      getAllPost();
     }
+    getPostForUser(match.params.key);
   }
 
   render() {
@@ -24,14 +31,15 @@ class Post extends Component {
   }
 }
 
-const mapStateToProps = ({usariosReducer, postsReducer}) => ({
+const mapStateToProps = ({usariosReducer, allPostsReducer}) => ({
   usariosReducer,
-  postsReducer,
+  allPostsReducer,
 });
 
 const mapDispathToProps = {
   ...getAll,
-  ...getAllPost,
+  getAllPost,
+  getPostForUser
 }
 
 export default connect(mapStateToProps, mapDispathToProps)(Post);
