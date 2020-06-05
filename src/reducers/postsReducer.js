@@ -6,9 +6,9 @@ const INITIAL_STATE = {
   errorMessagePost: '',
 }
 
-const users = (state = INITIAL_STATE, action) => {
+const posts = (state = INITIAL_STATE, action) => {
   const { type } = action;
-  const { loading, getPostForUser, errorMessage } = ACTIONS_NAMES;
+  const { loading, getPostForUser, errorMessagePost } = ACTIONS_NAMES;
   switch(type) {
     case loading:
       return {
@@ -23,7 +23,7 @@ const users = (state = INITIAL_STATE, action) => {
         loadingPosts: false,
         errorMessagePost: '',
       }
-    case errorMessage:
+    case errorMessagePost:
       return {
         ...state,
         loadingPosts: false,
@@ -34,4 +34,4 @@ const users = (state = INITIAL_STATE, action) => {
   }
 }
 
-export default users;
+export default posts;

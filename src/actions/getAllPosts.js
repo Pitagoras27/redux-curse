@@ -5,9 +5,9 @@ import { ACTIONS_NAMES } from '../constants';
 export const getPostForUser = key => async (dispatch, getState) => {
   const {
     getPostForUser,
-    errorMessage,
+    errorMessagePost,
     getUsers,
-    loading,
+    loadingPost,
   } = ACTIONS_NAMES;
 
   const { posts } = getState().postsReducer;
@@ -15,7 +15,7 @@ export const getPostForUser = key => async (dispatch, getState) => {
   const userId = usuarios[key];
 
   dispatch({
-    type: loading,
+    type: loadingPost,
     payload: true,
   })
 
@@ -42,8 +42,8 @@ export const getPostForUser = key => async (dispatch, getState) => {
 
   } catch (error) {
     dispatch({
-      type: errorMessage,
-      payload: 'Ha ocurrido un error, favor de intentar más tarde',
+      type: errorMessagePost,
+      payload: 'No se pudieron cargar las publicaciones, favor de intentar más tarde',
     });
   }
 }

@@ -27,28 +27,28 @@ class Post extends Component {
 
   putContentUser = () => {
     const {
-      postsReducer,
-      postsReducer: { loadingPosts },
+      postsReducer: { loadingPosts, errorMessagePost },
       postsReducer: { posts },
-      usariosReducer,
       usariosReducer: { loading, errorMessage, usuarios },
       match: { params: { key } },
     } = this.props;
 
-    if (errorMessage) return <Fail message={errorMessage} />
-
-    let contentPost = parseInt(key) + 1;
-
+    if (errorMessagePost) return <Fail message={errorMessagePost} />
+    
     if (!usuarios.length 
       || loading
       || loadingPosts
-      || posts.length !== contentPost
+      || !posts.length
     ) return <Spinner />
+      
+    if (!('postId' in usuarios[key])) return false;
+
+    const index = posts.length - 1
 
     return (
       <>
         <h1>Publicaciones de { usuarios[key].name }</h1>
-        {posts[key].map(post => (
+        {posts[index].map(post => (
           <div className='divisor' key={post.id}>
             <h2>{post.title}</h2>
             <p>{post.body}</p>
