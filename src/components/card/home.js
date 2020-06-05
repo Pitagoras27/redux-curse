@@ -11,7 +11,10 @@ import './home.css';
 
 class Home extends Component {
   componentDidMount() {
-    this.props.getAll()
+    const { usuarios } = this.props;
+    if(!usuarios.length) {
+      this.props.getAll()
+    }
   }
 
   render() {

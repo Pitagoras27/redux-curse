@@ -7,22 +7,27 @@ const INITIAL_STATE = {
 
 const users = (state = INITIAL_STATE, action) => {
   const { type, payload } = action;
+  const { getUsers, loading, errorMessage} = ACTIONS_NAMES;
+
   switch(type) {
-    case ACTIONS_NAMES.getUsers:
+    case getUsers:
       return {
         ...state,
         usuarios: payload,
         loading:false,
         errorMessage: '',
       }
-    case ACTIONS_NAMES.loading:
+
+    case loading:
       return {...state, loading: true}
-    case ACTIONS_NAMES.errorMessage:
+
+    case errorMessage:
       return {
         ...state,
         errorMessage: payload,
         loading:false,
       }
+
     default:
       return state;
   }
