@@ -25,7 +25,7 @@ const users = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         errorMessage: payload,
-        loading:false,
+        loading: false,
       }
 
     default:

@@ -25,27 +25,43 @@ class Post extends Component {
 		}
   }
 
-  putUser = () => {
-    const { 
+  putContentUser = () => {
+    const {
+      postsReducer,
+      postsReducer: { loadingPosts },
+      postsReducer: { posts },
+      usariosReducer,
       usariosReducer: { loading, errorMessage, usuarios },
       match: { params: { key } },
     } = this.props;
 
-    if (!usuarios.length || loading) return <Spinner />
-
     if (errorMessage) return <Fail message={errorMessage} />
-    
+
+    let contentPost = parseInt(key) + 1;
+
+    if (!usuarios.length 
+      || loading
+      || loadingPosts
+      || posts.length !== contentPost
+    ) return <Spinner />
+
     return (
-      // 
-      <h1>Publicaciones de { usuarios[key].name }</h1>
+      <>
+        <h1>Publicaciones de { usuarios[key].name }</h1>
+        {posts[key].map(post => (
+          <div className='divisor' key={post.id}>
+            <h2>{post.title}</h2>
+            <p>{post.body}</p>
+          </div>
+        ))}
+      </>
     )
   }
 
   render() {
-    console.log(this.props)
     return (
       <div className='main-container'>
-        {this.putUser()}
+        {this.putContentUser()}
       </div>
     )
   }

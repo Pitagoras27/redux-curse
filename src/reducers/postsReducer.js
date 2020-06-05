@@ -2,27 +2,32 @@ import { ACTIONS_NAMES } from '../constants';
 
 const INITIAL_STATE = {
   posts: [],
-  loading: false,
-  errorMessage: '',
+  loadingPosts: false,
+  errorMessagePost: '',
 }
 
 const users = (state = INITIAL_STATE, action) => {
   const { type } = action;
-  const { getPosts, getPostForUser } = ACTIONS_NAMES;
+  const { loading, getPostForUser, errorMessage } = ACTIONS_NAMES;
   switch(type) {
-    case getPosts:
+    case loading:
       return {
         ...state,
-        posts: action.payload,
-        loading: false,
-        errorMessage: '',
+        loadingPosts: action.payload,
+        errorMessagePost: '',
       }
     case getPostForUser:
       return {
         ...state,
         posts: action.payload,
-        loading: false,
-        errorMessage: '',
+        loadingPosts: false,
+        errorMessagePost: '',
+      }
+    case errorMessage:
+      return {
+        ...state,
+        loadingPosts: false,
+        errorMessagePost: action.payload,
       }
     default:
       return state;
