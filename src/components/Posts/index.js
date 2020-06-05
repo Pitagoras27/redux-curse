@@ -44,8 +44,7 @@ class Post extends Component {
   render() {
     console.log(this.props)
     return (
-      <div>
-        {this.props.match.params.key}
+      <div className='main-container'>
         {this.putUser()}
       </div>
     )

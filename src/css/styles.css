@@ -3,3 +3,9 @@
   align-items: center;
   justify-content: center;
 }
+
+.main-container {
+  width: 60%;
+  display: block;
+  margin: 0 auto;
+}
