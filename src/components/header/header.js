@@ -6,7 +6,7 @@ const Header = () => {
   return (
     <div className='header-container'>
       <Link to='/'>Usuarios</Link>
-      <Link to='tareas'>Homework</Link>
+      <Link to='/tareas'>Homework</Link>
     </div>
   )
 }
