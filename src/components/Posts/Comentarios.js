@@ -1,11 +1,17 @@
 import React from 'react';
 
+import '../../css/components/comments.css';
 const Comentarios = props => {
+  const { comments } = props; 
+  const allComments = () => (comments.map(comment => (
+    <li key={comment.id}>
+      <small>{comment.name}</small>
+      <p className='body-comment'>{comment.body}</p>
+    </li>
+  )))
   return (
     <ul>
-      <li>Comentario 1</li>
-      <li>Comentario 2</li>
-      <li>Comentario 3</li>
+      {allComments()}
     </ul>
   )
 }

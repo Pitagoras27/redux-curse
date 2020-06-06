@@ -67,7 +67,11 @@ class Post extends Component {
           >
             <h2>{post.title}</h2>
             <p>{post.body}</p>
-            {post.open ? <Comentarios /> : 'Close'}
+            {post.open ? 
+              <Comentarios
+                comments={post.comments}
+              /> 
+            : 'Close'}
           </div>
         ))}
       </>
