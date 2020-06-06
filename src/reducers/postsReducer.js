@@ -35,6 +35,7 @@ const posts = (state = INITIAL_STATE, action) => {
         ...state,
         posts: action.payload,
         loadingPosts: false,
+        loadingComments: false,
         errorMessagePost: '',
       }
     case errorMessagePost:

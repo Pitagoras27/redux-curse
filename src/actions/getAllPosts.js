@@ -83,7 +83,7 @@ export const getComments = (indexPost, indexComment) => async (dispatch, getStat
   })
 
   try {
-    const { data } = await axios.get(`https://jsonplaceholder.typicode.com/commentssss?postId=${selected.id}`);
+    const { data } = await axios.get(`https://jsonplaceholder.typicode.com/comments?postId=${selected.id}`);
     const setComments = {
       ...selected,
       comments: data,
