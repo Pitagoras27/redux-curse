@@ -55,7 +55,7 @@ class Post extends Component {
   }
 
   showInfo = (users, key, posts) => {
-    console.log(posts, '<<<----- posts');
+    console.log(posts, 'postspostspostsposts')
     return (  
       <>
         <h1>Publicaciones de { users[key].name }</h1>
@@ -70,6 +70,8 @@ class Post extends Component {
             {post.open ? 
               <Comentarios
                 comments={post.comments}
+                errorMessageComments={post.errorMessageComments}
+                loadingComments={post.loadingComments}
               /> 
             : 'Close'}
           </div>

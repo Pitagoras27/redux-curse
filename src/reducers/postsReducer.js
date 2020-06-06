@@ -3,18 +3,32 @@ import { ACTIONS_NAMES } from '../constants';
 const INITIAL_STATE = {
   posts: [],
   loadingPosts: false,
+  loadingComments: false,
   errorMessagePost: '',
 }
 
 const posts = (state = INITIAL_STATE, action) => {
   const { type } = action;
-  const { loading, getPostForUser, errorMessagePost } = ACTIONS_NAMES;
+  const {
+    loading,
+    getPostForUser,
+    errorMessagePost,
+    errorMessageComments,
+    loadingComments,
+  } = ACTIONS_NAMES;
+
   switch(type) {
     case loading:
       return {
         ...state,
         loadingPosts: action.payload,
         errorMessagePost: '',
+      }
+    case loadingComments:
+      return {
+        ...state,
+        loadingComments: action.payload,
+        errorMessageComments: ''
       }
     case getPostForUser:
       return {
@@ -28,6 +42,12 @@ const posts = (state = INITIAL_STATE, action) => {
         ...state,
         loadingPosts: false,
         errorMessagePost: action.payload,
+      }
+    case errorMessageComments:
+      return {
+        ...state,
+        loadingComments: false,
+        errorMessageComments: action.payload,
       }
     default:
       return state;

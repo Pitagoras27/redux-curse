@@ -73,25 +73,37 @@ export const toogleComments = (indexPost, indexComment) => (dispatch, getState) 
 }
 
 export const getComments = (indexPost, indexComment) => async (dispatch, getState) => {
-  const { getPostForUser } = ACTIONS_NAMES;
+  const { getPostForUser, errorMessageComments, loadingComments } = ACTIONS_NAMES;
   const { posts } = getState().postsReducer;
   const selected = posts[0][indexComment];
-  const { data } = await axios.get(`https://jsonplaceholder.typicode.com/comments?postId=${selected.id}`);
-
-  const setComments = {
-    ...selected,
-    comments: data,
-  };
-  
-  const inmmutableClone = posts.slice(0);
-  inmmutableClone[indexPost] = [
-    ...posts[indexPost],
-  ];
-
-  inmmutableClone[0][indexComment] = setComments;
 
   dispatch({
-    type: getPostForUser,
-    payload: inmmutableClone,
-  });
+    type: loadingComments,
+    payload: true,
+  })
+
+  try {
+    const { data } = await axios.get(`https://jsonplaceholder.typicode.com/commentssss?postId=${selected.id}`);
+    const setComments = {
+      ...selected,
+      comments: data,
+    };
+    
+    const inmmutableClone = posts.slice(0);
+    inmmutableClone[indexPost] = [
+      ...posts[indexPost],
+    ];
+
+    inmmutableClone[0][indexComment] = setComments;
+
+    dispatch({
+      type: getPostForUser,
+      payload: inmmutableClone,
+    }); 
+  } catch (error) {
+    dispatch({
+      type: errorMessageComments,
+      payload: 'No se pudieron cargar los comentarios, favor de intentar más tarde',
+    });
+  }
 }

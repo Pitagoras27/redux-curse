@@ -6,4 +6,6 @@ export const ACTIONS_NAMES = {
   getPosts: 'GET_POST',
   getPostForUser: 'GET_POST_FOR_USER',
   errorMessagePost: 'ERROR_POST',
+  errorMessageComments: 'ERROR_MESSAGE_COMMENTS',
+  loadingComments: 'LOADING_COMMENTS',
 }
