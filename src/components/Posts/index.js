@@ -55,6 +55,7 @@ class Post extends Component {
   }
 
   showInfo = (users, key, posts) => {
+    console.log(posts, '<<<----- posts');
     return (  
       <>
         <h1>Publicaciones de { users[key].name }</h1>
@@ -76,8 +77,9 @@ class Post extends Component {
   showComments = (pubIndex, commentIndex, comments) => {
     const { toogleComments, getComments } = this.props;
     toogleComments(pubIndex, commentIndex);
-    getComments(pubIndex, commentIndex);
+    if (!comments.length) getComments(pubIndex, commentIndex);
   }
+
   render() {
     return (
       <div className='main-container'>

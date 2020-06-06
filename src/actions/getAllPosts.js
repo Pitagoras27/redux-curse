@@ -20,7 +20,7 @@ export const getPostForUser = key => async (dispatch, getState) => {
   })
 
   try {
-    const { data } = await axios.get(`https://jsonplaceholder.typicode.com/posts?userId=${userId['id']}`)
+    const { data } = await axios.get(`https://jsonplaceholder.typicode.com/posts?userId=${userId['id']}`);
     const withComments = data.map(post => ({...post, comments: [], open: false }));
 
     const accumPosts = [...posts, withComments];
@@ -55,7 +55,6 @@ export const toogleComments = (indexPost, indexComment) => (dispatch, getState) 
   const { posts } = getState().postsReducer;
   const { getPostForUser } = ACTIONS_NAMES;
 
-  console.log('indexComment->', indexComment)
   const selected = posts[0][indexComment];
   const updated = {
     ...selected,
@@ -71,9 +70,28 @@ export const toogleComments = (indexPost, indexComment) => (dispatch, getState) 
     type: getPostForUser,
     payload: postUpdated,
   });
-  // console.log(indexPost, indexComment);
 }
 
-export const getComments = (postKey, commentKey) => (dispatch, getState) => {
+export const getComments = (indexPost, indexComment) => async (dispatch, getState) => {
+  const { getPostForUser } = ACTIONS_NAMES;
+  const { posts } = getState().postsReducer;
+  const selected = posts[0][indexComment];
+  const { data } = await axios.get(`https://jsonplaceholder.typicode.com/comments?postId=${selected.id}`);
 
+  const setComments = {
+    ...selected,
+    comments: data,
+  };
+  
+  const inmmutableClone = posts.slice(0);
+  inmmutableClone[indexPost] = [
+    ...posts[indexPost],
+  ];
+
+  inmmutableClone[0][indexComment] = setComments;
+
+  dispatch({
+    type: getPostForUser,
+    payload: inmmutableClone,
+  });
 }
