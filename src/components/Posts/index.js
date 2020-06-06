@@ -6,8 +6,12 @@ import * as getPostActions from '../../actions/getAllPosts';
 // import { getPostForUser } from '../../actions/getAllPosts';
 import Spinner from '../spinner/spinner';
 import Fail from '../Fail';
+import Comentarios from './Comentarios';
 
-const { getPostForUser: postUser, toogleComments } = getPostActions;
+const { getPostForUser: postUser,
+  toogleComments,
+  getComments } = getPostActions;
+
 class Post extends Component {
   async componentDidMount() {
     const {
@@ -51,8 +55,6 @@ class Post extends Component {
   }
 
   showInfo = (users, key, posts) => {
-    const { toogleComments } = this.props;
-    console.log(posts, '<<<')
     return (  
       <>
         <h1>Publicaciones de { users[key].name }</h1>
@@ -60,17 +62,22 @@ class Post extends Component {
           <div
             className='divisor'
             key={post.id}
-            onClick={() => { toogleComments(key, commentKey) }}
+            onClick={() => { this.showComments(key, commentKey, post.comments) }}
           >
             <h2>{post.title}</h2>
             <p>{post.body}</p>
-            {post.open ? 'Open' : 'Close'}
+            {post.open ? <Comentarios /> : 'Close'}
           </div>
         ))}
       </>
     )
   }
 
+  showComments = (pubIndex, commentIndex, comments) => {
+    const { toogleComments, getComments } = this.props;
+    toogleComments(pubIndex, commentIndex);
+    getComments(pubIndex, commentIndex);
+  }
   render() {
     return (
       <div className='main-container'>
@@ -89,6 +96,7 @@ const mapDispathToProps = {
   ...getAll,
   postUser,
   toogleComments,
+  getComments,
 }
 
 export default connect(mapStateToProps, mapDispathToProps)(Post);

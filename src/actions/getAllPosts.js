@@ -73,3 +73,7 @@ export const toogleComments = (indexPost, indexComment) => (dispatch, getState) 
   });
   // console.log(indexPost, indexComment);
 }
+
+export const getComments = (postKey, commentKey) => (dispatch, getState) => {
+
+}
