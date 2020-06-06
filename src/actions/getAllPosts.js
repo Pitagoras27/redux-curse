@@ -51,6 +51,25 @@ export const getPostForUser = key => async (dispatch, getState) => {
 }
 
 
-export const toogleComments = (indexPost, indexComment) => dispatch => {
-  console.log(indexPost, indexComment);
+export const toogleComments = (indexPost, indexComment) => (dispatch, getState) => {
+  const { posts } = getState().postsReducer;
+  const { getPostForUser } = ACTIONS_NAMES;
+
+  console.log('indexComment->', indexComment)
+  const selected = posts[0][indexComment];
+  const updated = {
+    ...selected,
+    open: !selected.open,
+  }
+  const postUpdated = posts.slice(0);
+  postUpdated[0] = [
+    ...posts[0],
+  ];
+  postUpdated[0][indexComment] = updated;
+
+  dispatch({
+    type: getPostForUser,
+    payload: postUpdated,
+  });
+  // console.log(indexPost, indexComment);
 }

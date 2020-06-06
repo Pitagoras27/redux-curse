@@ -52,6 +52,7 @@ class Post extends Component {
 
   showInfo = (users, key, posts) => {
     const { toogleComments } = this.props;
+    console.log(posts, '<<<')
     return (  
       <>
         <h1>Publicaciones de { users[key].name }</h1>
@@ -63,6 +64,7 @@ class Post extends Component {
           >
             <h2>{post.title}</h2>
             <p>{post.body}</p>
+            {post.open ? 'Open' : 'Close'}
           </div>
         ))}
       </>
