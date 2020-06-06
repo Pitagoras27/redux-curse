@@ -44,12 +44,20 @@ class Post extends Component {
     if (!('postId' in usuarios[key])) return false;
 
     const index = posts.length - 1
+    
+    return this.showInfo( usuarios[key], posts[index]);
+  }
 
-    return (
+  showInfo = (users, posts) => {
+    return (  
       <>
-        <h1>Publicaciones de { usuarios[key].name }</h1>
-        {posts[index].map(post => (
-          <div className='divisor' key={post.id}>
+        <h1>Publicaciones de { users.name }</h1>
+        {posts.map(post => (
+          <div
+            className='divisor'
+            key={post.id}
+            onClick={() => { alert(post.id)}}
+          >
             <h2>{post.title}</h2>
             <p>{post.body}</p>
           </div>

@@ -19,7 +19,6 @@ const users = (state = INITIAL_STATE, action) => {
       }
 
     case loading:
-      console.log('in loading on user reducer')
       return {...state, loading: true}
 
     case errorMessage:
