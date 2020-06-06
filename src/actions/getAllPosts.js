@@ -22,9 +22,8 @@ export const getPostForUser = key => async (dispatch, getState) => {
   try {
     const { data } = await axios.get(`https://jsonplaceholder.typicode.com/posts?userId=${userId['id']}`)
     const withComments = data.map(post => ({...post, comments: [], open: false }));
-    console.log(withComments, '<--<< withComments');
 
-    const accumPosts = [...posts, data];
+    const accumPosts = [...posts, withComments];
     const postId = accumPosts.length -1;
     const updateUsers = usuarios.slice(0);
 
@@ -49,4 +48,9 @@ export const getPostForUser = key => async (dispatch, getState) => {
       payload: 'No se pudieron cargar las publicaciones, favor de intentar más tarde',
     });
   }
+}
+
+
+export const toogleComments = (indexPost, indexComment) => dispatch => {
+  console.log(indexPost, indexComment);
 }
