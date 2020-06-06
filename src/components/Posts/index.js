@@ -2,15 +2,17 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 
 import * as getAll from '../../actions';
-import { getPostForUser } from '../../actions/getAllPosts';
+import * as getPostActions from '../../actions/getAllPosts';
+// import { getPostForUser } from '../../actions/getAllPosts';
 import Spinner from '../spinner/spinner';
 import Fail from '../Fail';
 
+const { getPostForUser: postUser, toogleComments } = getPostActions;
 class Post extends Component {
   async componentDidMount() {
     const {
       getAll,
-      getPostForUser,
+      postUser,
       match: { params: { key } },
     } = this.props;
 
@@ -21,7 +23,7 @@ class Post extends Component {
       return false;
     }
     if (!('postId' in this.props.usariosReducer.usuarios[key])) {
-      await getPostForUser(key);
+      await postUser(key);
 		}
   }
 
@@ -44,19 +46,20 @@ class Post extends Component {
     if (!('postId' in usuarios[key])) return false;
 
     const index = posts.length - 1
-    
-    return this.showInfo( usuarios[key], posts[index]);
+
+    return this.showInfo( usuarios, key, posts[index]);
   }
 
-  showInfo = (users, posts) => {
+  showInfo = (users, key, posts) => {
+    const { toogleComments } = this.props;
     return (  
       <>
-        <h1>Publicaciones de { users.name }</h1>
-        {posts.map(post => (
+        <h1>Publicaciones de { users[key].name }</h1>
+        {posts.map((post, commentKey) => (
           <div
             className='divisor'
             key={post.id}
-            onClick={() => { alert(post.id)}}
+            onClick={() => { toogleComments(key, commentKey) }}
           >
             <h2>{post.title}</h2>
             <p>{post.body}</p>
@@ -82,7 +85,8 @@ const mapStateToProps = ({usariosReducer, postsReducer}) => ({
 
 const mapDispathToProps = {
   ...getAll,
-  getPostForUser
+  postUser,
+  toogleComments,
 }
 
 export default connect(mapStateToProps, mapDispathToProps)(Post);
