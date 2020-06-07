@@ -6,8 +6,9 @@ import '../../css/components/comments.css';
 
 const Comentarios = props => {
   const { comments, errorMessageComments, loadingComments } = props;
-  if (loadingComments) return <Spinner />
-  if (errorMessageComments) return <Fail message={errorMessageComments}/>
+  if (errorMessageComments) return <Fail message={errorMessageComments} />
+  if (loadingComments && comments.length === 0) return <Spinner />
+
   const allComments = () => (comments.map(comment => (
     <li key={comment.id}>
       <small>{comment.name}</small>
