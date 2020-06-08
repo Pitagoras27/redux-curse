@@ -9,6 +9,7 @@ class Todos extends Component {
   }
 
   render() {
+    console.log('on todos component! ->', this.props)
     return (
       <div>Todos!</div>
     )

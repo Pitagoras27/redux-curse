@@ -18,9 +18,19 @@ export const getTodosAction = () => async dispatch => {
 
   try {
     const { data } = await axios.get('http://jsonplaceholder.typicode.com/todos');
+    const todoData = {};
+    data.forEach(item => (
+      todoData[item.userId] = {
+        ...todoData[item.userId],
+        [item.id]: {
+          ...item,
+        }
+      } 
+    ))
+
     dispatch({
       type: getTodos,
-      payload: data,
+      payload: todoData,
     })
   } catch (error) {
     dispatch({
