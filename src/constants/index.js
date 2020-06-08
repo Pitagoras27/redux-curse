@@ -9,3 +9,9 @@ export const ACTIONS_NAMES = {
   errorMessageComments: 'ERROR_MESSAGE_COMMENTS',
   loadingComments: 'LOADING_COMMENTS',
 }
+
+export const TODOS = {
+  getTodos: 'GET_TODOS',
+  loading: 'LOADING_TODOS',
+  errorMessageTodos: 'ERROR_MESSAGE_TODOS',
+}
