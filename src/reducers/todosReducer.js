@@ -8,6 +8,7 @@ const INITIAL_STATE = {
   errorMessageTodos: '',
   tasks: {},
   saveTask: {},
+  returnListTasks: false,
 }
 
 const todosList = (state = INITIAL_STATE, action) => {
@@ -34,9 +35,10 @@ const todosList = (state = INITIAL_STATE, action) => {
         loadingTodos: false,
         todos: payload,
         errorMessageTodos: '',
+        returnListTasks: false,
+        tasks: {},
       }
     case errorMessageTodos:
-      console.log('payload errorMessageTodos->', payload);
       return {
         ...state,
         loadingTodos: false,
@@ -51,7 +53,7 @@ const todosList = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         saveTask: payload,
-
+        returnListTasks: true,
       }
     default: 
       return {

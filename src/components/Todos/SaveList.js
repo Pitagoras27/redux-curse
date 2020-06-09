@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import Spinner from '../spinner/spinner';
 import Fail from '../Fail';
@@ -51,8 +52,10 @@ class SaveList extends Component {
 
   }
   render() {
+    const { returnListTasks } = this.props.todos;
     return (
       <div>
+        { returnListTasks ? <Redirect to='/tareas' /> : '' }
         {this.showAction()}
         <h2>Save list</h2>
         User ID: {' '}
