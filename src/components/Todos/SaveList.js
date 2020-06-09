@@ -19,13 +19,15 @@ class SaveList extends Component {
       setTitleList,
     } = tasks;
 
-    saveTask({
-      setIdUserList,
-      setTitleList,
-    });
+    const newTask = {
+			userId: setIdUserList,
+			title: setTitleList,
+			completed: false
+    };
+
+    saveTask(newTask);
   }
   render() {
-    console.log('this,proips.-', this.props);
     return (
       <div>
         <h2>Save list</h2>

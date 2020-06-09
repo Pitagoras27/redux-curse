@@ -61,7 +61,7 @@ export const saveTask = bodyPost => async dispatch => {
   dispatch({
     type: loading,
     dispatch: true
-  })
+  });
   try {
     const { data } = await axios.post('https://jsonplaceholder.typicode.com/todos', bodyPost);
     dispatch({
@@ -69,10 +69,10 @@ export const saveTask = bodyPost => async dispatch => {
       payload: data,
     })
   } catch (error) {
-    console.log('action creator error', error)
+    
     dispatch({
       type: errorTodos,
       dispatch: 'Lo sentimos no se pudo guardar la información',
-    })   
+    });
   }
 }
