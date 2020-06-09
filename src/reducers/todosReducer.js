@@ -5,7 +5,7 @@ const { TODOS: typesTodoList } = todos;
 const INITIAL_STATE = {
   todos: {},
   loadingTodos: false,
-  errorTodos: '',
+  errorMessageTodos: '',
   tasks: {},
   saveTask: {},
 }
@@ -14,7 +14,7 @@ const todosList = (state = INITIAL_STATE, action) => {
   const {
     loading,
     getTodos,
-    errorTodos,
+    errorMessageTodos,
     setTasks,
     saveTask,
   } = typesTodoList;
@@ -26,20 +26,21 @@ const todosList = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         loadingTodos: payload,
-        errorTodos: '',
+        errorMessageTodos: '',
       }
     case getTodos:
       return {
         ...state,
         loadingTodos: false,
         todos: payload,
-        errorTodos: '',
+        errorMessageTodos: '',
       }
-    case errorTodos: 
+    case errorMessageTodos:
+      console.log('payload errorMessageTodos->', payload);
       return {
         ...state,
         loadingTodos: false,
-        errorTodos: payload
+        errorMessageTodos: payload
       }
     case setTasks:
       return {

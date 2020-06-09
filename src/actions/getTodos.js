@@ -8,7 +8,7 @@ export const getTodosAction = () => async dispatch => {
   const {
     loading,
     getTodos,
-    errorTodos,
+    errorMessageTodos,
   } = typesTodoList;
 
   dispatch({
@@ -34,7 +34,7 @@ export const getTodosAction = () => async dispatch => {
     })
   } catch (error) {
     dispatch({
-      type: errorTodos,
+      type: errorMessageTodos,
       payload: 'No se ha podido recuperar la lista de tareas, favor de intentar más tarde',
     })
   }
@@ -55,12 +55,12 @@ export const saveTask = bodyPost => async dispatch => {
   const { 
     saveTask,
     loading,
-    errorTodos,
-  } = typesTodoList
+    errorMessageTodos,
+  } = typesTodoList;
 
   dispatch({
     type: loading,
-    dispatch: true
+    payload: true
   });
   try {
     const { data } = await axios.post('https://jsonplaceholder.typicode.com/todos', bodyPost);
@@ -69,10 +69,9 @@ export const saveTask = bodyPost => async dispatch => {
       payload: data,
     })
   } catch (error) {
-    
     dispatch({
-      type: errorTodos,
-      dispatch: 'Lo sentimos no se pudo guardar la información',
+      type: errorMessageTodos,
+      payload: 'Lo sentimos no se pudo guardar la información',
     });
   }
 }

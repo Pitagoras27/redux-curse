@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
+
+import Spinner from '../spinner/spinner';
+import Fail from '../Fail';
+
 import { 
   handleChange,
   saveTask,
@@ -12,8 +16,20 @@ class SaveList extends Component {
     handleChange(e.target)
   }
 
+  activeButton = () => {
+    const { todos: { tasks } } = this.props;
+    const {
+      setIdUserList,
+      setTitleList,
+    } = tasks;
+
+    if (!(setIdUserList) || !(setTitleList)) return true;
+
+    return false;
+  }
+
   handleSend = () => {
-    const { saveTask, tasks: { tasks } } = this.props;
+    const { saveTask, todos: { tasks } } = this.props;
     const {
       setIdUserList,
       setTitleList,
@@ -27,9 +43,17 @@ class SaveList extends Component {
 
     saveTask(newTask);
   }
+
+  showAction = () => {
+    const { errorMessageTodos, loadingTodos } = this.props.todos;
+    if (loadingTodos) return <Spinner />
+    if (errorMessageTodos) return <Fail message={errorMessageTodos} />
+
+  }
   render() {
     return (
       <div>
+        {this.showAction()}
         <h2>Save list</h2>
         User ID: {' '}
         <input
@@ -45,14 +69,20 @@ class SaveList extends Component {
           name='setTitleList'
         />
         <br/><br/>
-        <button type='button' onClick={this.handleSend}>Save info</button>
+        <button
+          type='button'
+          onClick={ this.handleSend }
+          disabled={ this.activeButton() }
+        >
+            Save info
+          </button>
       </div>
     )
   }
 }
 
 const mapStateToProps = state => ({
-  tasks: state.todosReducer,
+  todos: state.todosReducer,
 });
 
 const mapDispatchToProps = {

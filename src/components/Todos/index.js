@@ -18,13 +18,12 @@ class Todos extends Component {
   }
 
   showContent = () => {
-		const { todos, loadingTodos, errorTodos } = this.props.todos;
-
+		const { todos, loadingTodos, errorMessageTodos } = this.props.todos;
 		if (loadingTodos) {
 			return <Spinner />
 		}
-		if (errorTodos) {
-			return <Fail mensaje={ errorTodos } />
+		if (errorMessageTodos) {
+			return <Fail message={ errorMessageTodos } />
 		}
 
 		return Object.keys(todos).map((userId) => (
