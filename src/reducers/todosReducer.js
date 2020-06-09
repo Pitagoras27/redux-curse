@@ -6,6 +6,7 @@ const INITIAL_STATE = {
   todos: {},
   loadingTodos: false,
   errorTodos: '',
+  tasks: {},
 }
 
 const todosList = (state = INITIAL_STATE, action) => {
@@ -13,6 +14,7 @@ const todosList = (state = INITIAL_STATE, action) => {
     loading,
     getTodos,
     errorTodos,
+    setTasks,
   } = typesTodoList;
 
   const { type, payload } = action;
@@ -37,10 +39,15 @@ const todosList = (state = INITIAL_STATE, action) => {
         loadingTodos: false,
         errorTodos: payload
       }
+    case setTasks:
+      return {
+        ...state,
+        tasks: payload
+      }
     default: 
       return {
-      ...state,
-    }
+        ...state,
+      }
   }
 }
 

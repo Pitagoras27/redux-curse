@@ -14,4 +14,5 @@ export const TODOS = {
   getTodos: 'GET_TODOS',
   loading: 'LOADING_TODOS',
   errorMessageTodos: 'ERROR_MESSAGE_TODOS',
+  setTasks: 'SET_TASKS'
 }

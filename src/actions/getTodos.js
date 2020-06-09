@@ -39,3 +39,14 @@ export const getTodosAction = () => async dispatch => {
     })
   }
 }
+
+export const handleChange = event => (dispatch, getState) => {
+  const { setTasks } = typesTodoList;
+  const { value, name } = event;
+  const { tasks } = getState().todosReducer;
+  const setTask = { ...tasks, [name]: value };
+  dispatch({
+    type: setTasks,
+    payload: setTask, 
+  })
+} 
