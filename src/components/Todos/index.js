@@ -10,12 +10,11 @@ class Todos extends Component {
   
   componentDidMount() {
 		const { getTodosAction, todos } = this.props;
-		if(!todos.length) 
-		{
-			console.log('todos -> ', todos)
+		const list = todos.todos;
+
+		if(!Object.keys(list).length) {
 			getTodosAction();
 		}
-		console.log('list ->')
   }
 
   showContent = () => {
