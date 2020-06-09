@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import Spinner from '../spinner/spinner';
 import Fail from '../Fail';
@@ -48,9 +49,11 @@ class Todos extends Component {
 	};
 
 	render() {
-		console.log(this.props.tareas);
 		return (
 			<div className='main-container-todolist'>
+        <Link to='/tareas/guardar'>
+          <button type='button'>Save new list</button>
+        </Link>
 				{ this.showContent() }
 			</div>
 		);
