@@ -1,14 +1,31 @@
 import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
-import { handleChange } from '../../actions/getTodos';
+import { 
+  handleChange,
+  saveTask,
+} from '../../actions/getTodos';
+
 class SaveList extends Component {
   handleInput = (e) => {
     const { handleChange } = this.props;
     handleChange(e.target)
   }
+
+  handleSend = () => {
+    const { saveTask, tasks: { tasks } } = this.props;
+    const {
+      setIdUserList,
+      setTitleList,
+    } = tasks;
+
+    saveTask({
+      setIdUserList,
+      setTitleList,
+    });
+  }
   render() {
-    console.log('this.props->', this.props)
+    console.log('this,proips.-', this.props);
     return (
       <div>
         <h2>Save list</h2>
@@ -26,6 +43,7 @@ class SaveList extends Component {
           name='setTitleList'
         />
         <br/><br/>
+        <button type='button' onClick={this.handleSend}>Save info</button>
       </div>
     )
   }
@@ -37,6 +55,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   handleChange,
+  saveTask,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SaveList);

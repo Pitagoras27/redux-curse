@@ -9,7 +9,13 @@ import '../../css/components/todoLIst.css';
 class Todos extends Component {
   
   componentDidMount() {
-    this.props.getTodosAction();
+		const { getTodosAction, todos } = this.props;
+		if(!todos.length) 
+		{
+			console.log('todos -> ', todos)
+			getTodosAction();
+		}
+		console.log('list ->')
   }
 
   showContent = () => {

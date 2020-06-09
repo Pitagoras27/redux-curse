@@ -49,4 +49,30 @@ export const handleChange = event => (dispatch, getState) => {
     type: setTasks,
     payload: setTask, 
   })
-} 
+}
+
+export const saveTask = bodyPost => async dispatch => {
+  const { 
+    saveTask,
+    loading,
+    errorTodos,
+  } = typesTodoList
+
+  dispatch({
+    type: loading,
+    dispatch: true
+  })
+  try {
+    const { data } = await axios.post('https://jsonplaceholder.typicode.com/todos', bodyPost);
+    dispatch({
+      type: saveTask,
+      payload: data,
+    })
+  } catch (error) {
+    console.log('action creator error', error)
+    dispatch({
+      type: errorTodos,
+      dispatch: 'Lo sentimos no se pudo guardar la información',
+    })   
+  }
+}
