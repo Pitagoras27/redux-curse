@@ -13,13 +13,16 @@ import '../../css/components/todoLIst.css';
 class Todos extends Component {
   
   componentDidMount() {
-		const { getTodosAction, todos } = this.props;
-		const list = todos.todos;
-
-		if(!Object.keys(list).length) {
-			getTodosAction();
+		if(!Object.keys(this.props.todos.todos).length) {
+			this.props.getTodosAction();
 		}
-  }
+	}
+	
+	componentDidUpdate() {
+		if(!Object.keys(this.props.todos.todos).length) {
+			// this.props.getTodosAction()
+		}
+	}
 
   showContent = () => {
 		const { todos, loadingTodos, errorMessageTodos } = this.props.todos;
