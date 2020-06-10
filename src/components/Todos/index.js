@@ -4,7 +4,11 @@ import { Link } from 'react-router-dom';
 
 import Spinner from '../spinner/spinner';
 import Fail from '../Fail';
-import { getTodosAction, persistCheckbox } from '../../actions/getTodos';
+import {
+	getTodosAction,
+	persistCheckbox,
+	deleteItem
+} from '../../actions/getTodos';
 import '../../css/components/todoLIst.css';
 class Todos extends Component {
   
@@ -14,9 +18,7 @@ class Todos extends Component {
 
 		if(!Object.keys(list).length) {
 			getTodosAction();
-			console.log('on componentDidMount getTodosAction')
 		}
-		console.log('outher todos object data exists')
   }
 
   showContent = () => {
@@ -43,6 +45,7 @@ class Todos extends Component {
 		const {
 			persistCheckbox,
 			todos: { todos },
+			deleteItem,
 		} = this.props;
 
 		const forUser = {
@@ -59,7 +62,10 @@ class Todos extends Component {
 				<Link to={`/tareas/guardar/${userId}/${todoId}`}>
 					<button type='button'>Editar</button>
 				</Link>
-				<button type='button'>Eliminar</button>
+				<button 
+					type='button'
+					onClick={() => deleteItem(todoId)}
+				>Eliminar</button>
 			</div>
 		));
 	};
@@ -83,6 +89,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
 	getTodosAction,
 	persistCheckbox,
+	deleteItem,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Todos);

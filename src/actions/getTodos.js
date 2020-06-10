@@ -126,5 +126,30 @@ export const persistCheckbox = ({ userId, todoId }) => (dispatch, getState) => {
     type: checkboxListState,
     payload: cloneInmutable
   })
+}
 
+export const deleteItem = idTask => async dispatch => {
+  const { 
+    loading,
+    errorMessageTodos,
+    getTodos,
+  } = typesTodoList;
+
+  dispatch({
+    type: loading,
+    payload: true
+  });
+  try {
+    const { data } = await axios.
+      delete(`https://jsonplaceholder.typicode.com/todos/${idTask}`);
+    dispatch({
+      type: getTodos,
+      dispatch: {}
+    })
+  } catch (error) {
+    dispatch({
+      type: errorMessageTodos,
+      payload: 'No se pudo eliminar el item asociado, favor de intentar más tarde',
+    })
+  }
 }
