@@ -16,4 +16,5 @@ export const TODOS = {
   errorMessageTodos: 'ERROR_MESSAGE_TODOS',
   setTasks: 'SET_TASKS',
   saveTask: 'SAVE_TASK',
+  editTask: 'EDIT_TASK',
 }

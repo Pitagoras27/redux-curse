@@ -79,9 +79,9 @@ class SaveList extends Component {
         id: data.id,
       }
       updateTask(sendObject);
+    } else {
+      saveTask(newTask);
     }
-
-    saveTask(newTask);
   }
 
   showAction = () => {

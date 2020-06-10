@@ -76,6 +76,30 @@ export const saveTask = bodyPost => async dispatch => {
   }
 }
 
-export const updateTask = editInfo => dispatch => {
-  console.log('editinfo', editInfo)
+export const updateTask = editInfo => async dispatch => {
+  const { 
+    editTask,
+    loading,
+    errorMessageTodos,
+  } = typesTodoList;
+  dispatch({
+    type: loading,
+    payload: true
+  });
+  try {
+    const { data } = await axios.put(
+      `https://jsonplaceholder.typicode.com/todos/${editInfo.userId}`,
+      editInfo
+    );
+
+    dispatch({
+      type: editTask,
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: errorMessageTodos,
+      payload: 'Lo sentimos no se pudo actualizar la información',
+    });
+  }
 }
