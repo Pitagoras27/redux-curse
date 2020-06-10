@@ -49,6 +49,10 @@ class Todos extends Component {
 					defaultChecked={ forUser[todoId].completed }
 				/>
 				{ forUser[todoId].title }
+				<Link to={`/tareas/guardar/${userId}/${todoId}`}>
+					<button type='button'>Editar</button>
+				</Link>
+				<button type='button'>Eliminar</button>
 			</div>
 		));
 	};
