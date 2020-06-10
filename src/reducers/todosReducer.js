@@ -53,7 +53,9 @@ const todosList = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         saveTask: payload,
+        todos: {},
         returnListTasks: true,
+        loadingTodos: false,
       }
     default: 
       return {

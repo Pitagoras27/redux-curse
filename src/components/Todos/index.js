@@ -19,6 +19,7 @@ class Todos extends Component {
 
   showContent = () => {
 		const { todos, loadingTodos, errorMessageTodos } = this.props.todos;
+
 		if (loadingTodos) {
 			return <Spinner />
 		}
