@@ -14,7 +14,9 @@ class Todos extends Component {
 
 		if(!Object.keys(list).length) {
 			getTodosAction();
+			console.log('on componentDidMount getTodosAction')
 		}
+		console.log('outher todos object data exists')
   }
 
   showContent = () => {
