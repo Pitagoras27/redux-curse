@@ -152,3 +152,11 @@ export const deleteItem = idTask => async dispatch => {
     })
   }
 }
+
+export const cleanForm = () => dispatch => {
+  const { cleanForm } = typesTodoList;
+
+  dispatch({
+    type: cleanForm,
+  })
+}

@@ -18,4 +18,5 @@ export const TODOS = {
   saveTask: 'SAVE_TASK',
   editTask: 'EDIT_TASK',
   checkboxListState: 'CHECKBOX_LIST_STATE',
+  cleanForm: 'CLEAN_FORM',
 }

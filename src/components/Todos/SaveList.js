@@ -10,6 +10,7 @@ import {
   handleChange,
   saveTask,
   updateTask,
+  cleanForm,
 } from '../../actions/getTodos';
 
 class SaveList extends Component {
@@ -17,6 +18,7 @@ class SaveList extends Component {
     const { 
       match: { params: { userId, todoId }},
       handleChange,
+      cleanForm,
       todos: { todos },
     } = this.props;
     if(userId || todoId) {
@@ -29,6 +31,8 @@ class SaveList extends Component {
         name: 'setTitleList',
         value: data.title,
       });
+    } else {
+      cleanForm()
     }
   }
 
@@ -66,9 +70,9 @@ class SaveList extends Component {
     } = tasks;
 
     const newTask = {
-			userId: setIdUserList,
-			title: setTitleList,
-			completed: false,
+      userId: setIdUserList,
+      title: setTitleList,
+      completed: false,
     };
 
     if (userId || todoId) {
@@ -94,7 +98,6 @@ class SaveList extends Component {
   render() {
     const { returnListTasks, tasks } = this.props.todos;
     const { setIdUserList, setTitleList } = tasks;
-
     return (
       <div>
         { returnListTasks ? <Redirect to='/tareas' /> : '' }
@@ -136,6 +139,7 @@ const mapDispatchToProps = {
   handleChange,
   saveTask,
   updateTask,
+  cleanForm,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SaveList);

@@ -21,6 +21,7 @@ const todosList = (state = INITIAL_STATE, action) => {
     saveTask,
     editTask,
     checkboxListState,
+    cleanForm,
   } = typesTodoList;
 
   const { type, payload } = action;
@@ -73,6 +74,11 @@ const todosList = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         todos: payload,
+      }
+    case cleanForm:
+      return {
+        ...state,
+        tasks: {},
       }
     default: 
       return {
