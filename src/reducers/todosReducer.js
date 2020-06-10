@@ -56,6 +56,7 @@ const todosList = (state = INITIAL_STATE, action) => {
         todos: {},
         returnListTasks: true,
         loadingTodos: false,
+        tasks: {}
       }
     default: 
       return {

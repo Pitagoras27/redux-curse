@@ -12,6 +12,26 @@ import {
 } from '../../actions/getTodos';
 
 class SaveList extends Component {
+  componentDidMount () {
+    const { 
+      match: { params: { userId, todoId }},
+      handleChange,
+      todos: { todos },
+    } = this.props;
+
+    if(userId || todoId) {
+      const data = todos[userId][todoId];
+      handleChange({
+        name: 'setIdUserList',
+        value: data.id,
+      });
+      handleChange({
+        name: 'setTitleList',
+        value: data.title,
+      });
+    }
+  }
+
   handleInput = (e) => {
     const { handleChange } = this.props;
     handleChange(e.target)
@@ -52,7 +72,9 @@ class SaveList extends Component {
 
   }
   render() {
-    const { returnListTasks } = this.props.todos;
+    const { returnListTasks, tasks } = this.props.todos;
+    const { setIdUserList, setTitleList } = tasks;
+
     return (
       <div>
         { returnListTasks ? <Redirect to='/tareas' /> : '' }
@@ -63,6 +85,7 @@ class SaveList extends Component {
           type='number'
           onChange={this.handleInput}
           name='setIdUserList'
+          value={setIdUserList}
         />
         <br/><br/>
         Title: {' '}
@@ -70,6 +93,7 @@ class SaveList extends Component {
           type='text'
           onChange={this.handleInput}
           name='setTitleList'
+          value={setTitleList}
         />
         <br/><br/>
         <button
