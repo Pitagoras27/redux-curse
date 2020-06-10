@@ -19,7 +19,6 @@ class SaveList extends Component {
       handleChange,
       todos: { todos },
     } = this.props;
-
     if(userId || todoId) {
       const data = todos[userId][todoId];
       handleChange({
@@ -39,12 +38,14 @@ class SaveList extends Component {
   }
 
   activeButton = () => {
-    const { todos: { tasks } } = this.props;
+    const {
+      todos: { tasks, loadingTodos } } = this.props;
     const {
       setIdUserList,
       setTitleList,
     } = tasks;
-
+    
+    if (loadingTodos) return true;
     if (!(setIdUserList) || !(setTitleList)) return true;
 
     return false;
