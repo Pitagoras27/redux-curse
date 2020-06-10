@@ -9,6 +9,7 @@ import Fail from '../Fail';
 import { 
   handleChange,
   saveTask,
+  updateTask,
 } from '../../actions/getTodos';
 
 class SaveList extends Component {
@@ -50,7 +51,14 @@ class SaveList extends Component {
   }
 
   handleSend = () => {
-    const { saveTask, todos: { tasks } } = this.props;
+    const { 
+      saveTask,
+      todos: { tasks }, 
+      todos: { todos },
+      match: { params: { userId, todoId }},
+      updateTask,
+    } = this.props;
+    
     const {
       setIdUserList,
       setTitleList,
@@ -59,8 +67,19 @@ class SaveList extends Component {
     const newTask = {
 			userId: setIdUserList,
 			title: setTitleList,
-			completed: false
+			completed: false,
     };
+
+    if (userId || todoId) {
+      const data = todos[userId][todoId]
+      const sendObject = {
+        ...newTask,
+        completed: data.completed,
+        title: data.title,
+        id: data.id,
+      }
+      updateTask(sendObject);
+    }
 
     saveTask(newTask);
   }
@@ -115,6 +134,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   handleChange,
   saveTask,
+  updateTask,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SaveList);

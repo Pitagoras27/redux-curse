@@ -75,3 +75,7 @@ export const saveTask = bodyPost => async dispatch => {
     });
   }
 }
+
+export const updateTask = editInfo => dispatch => {
+  console.log('editinfo', editInfo)
+}
