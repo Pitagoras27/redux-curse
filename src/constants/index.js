@@ -17,4 +17,5 @@ export const TODOS = {
   setTasks: 'SET_TASKS',
   saveTask: 'SAVE_TASK',
   editTask: 'EDIT_TASK',
+  checkboxListState: 'CHECKBOX_LIST_STATE',
 }

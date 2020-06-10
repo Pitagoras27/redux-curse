@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import Spinner from '../spinner/spinner';
 import Fail from '../Fail';
-import { getTodosAction } from '../../actions/getTodos';
+import { getTodosAction, persistCheckbox } from '../../actions/getTodos';
 import '../../css/components/todoLIst.css';
 class Todos extends Component {
   
@@ -38,7 +38,11 @@ class Todos extends Component {
 	};
 
 	setTodoUI = (userId) => {
-		const { todos } = this.props.todos;
+		const {
+			persistCheckbox,
+			todos: { todos },
+		} = this.props;
+
 		const forUser = {
 			...todos[userId]
 		};
@@ -47,6 +51,7 @@ class Todos extends Component {
 			<div key={ todoId }>
 				<input type='checkbox'
 					defaultChecked={ forUser[todoId].completed }
+					onChange={ () => persistCheckbox({ userId, todoId }) }
 				/>
 				{ forUser[todoId].title }
 				<Link to={`/tareas/guardar/${userId}/${todoId}`}>
@@ -74,7 +79,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  getTodosAction,
+	getTodosAction,
+	persistCheckbox,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Todos);

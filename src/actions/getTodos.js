@@ -103,3 +103,28 @@ export const updateTask = editInfo => async dispatch => {
     });
   }
 }
+
+export const persistCheckbox = ({ userId, todoId }) => (dispatch, getState) => {
+  const { checkboxListState } = typesTodoList;
+  const { todos } = getState().todosReducer;
+  const selected = todos[userId][todoId];
+
+  const cloneInmutable = {
+    ...todos,
+  }
+
+  cloneInmutable[userId] = {
+    ...todos[userId]
+  }
+
+  cloneInmutable[userId][todoId] = {
+    ...todos[userId][todoId],
+    completed: !selected.completed,
+  }
+
+  dispatch({
+    type: checkboxListState,
+    payload: cloneInmutable
+  })
+
+}
