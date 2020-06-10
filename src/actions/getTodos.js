@@ -143,7 +143,7 @@ export const deleteItem = idTask => async dispatch => {
     await axios.delete(`https://jsonplaceholder.typicode.com/todos/${idTask}`);
     dispatch({
       type: getTodos,
-      dispatch: {}
+      payload: {}
     })
   } catch (error) {
     dispatch({
